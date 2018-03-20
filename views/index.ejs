@@ -6,7 +6,7 @@
     <h1>welcome</h1>
     <ol>
       <% for (var i = 0; i < tweets.length; i++) {%>
-        <li><%= tweets[i] %></li>
+        <li><a href=<%= tweets[i].url %>><%= tweets[i].text %></a></li>
       <% } %>
     </ol>
   </body>
