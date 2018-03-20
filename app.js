@@ -11,8 +11,9 @@ var config = require('./config.js');
 
 app.get('/', function (req,res) {
   twitterReq().then(tweets => {
-    res.render('index', { tweets: tweets })
+    res.render('index', { tweets: tweets() })
   })
+  .catch( reject => { console.log(reject()) })
 });
 
 app.listen(3000, () => console.log('Listening on port 3000'))
@@ -31,19 +32,13 @@ function twitterReq(){
   const prom = new Promise(function(resolve,reject) {
     T.get('search/tweets', params, function(err, data, response) {
         resolve( () => {
-          var tweets = data.statuses.map(tweet => tweet.text)
-          return tweets
+          var getTweetText = data.statuses.map(tweet => tweet.text)
+          return getTweetText
         });
 
-        reject( () => { console.log("failure") });
+        reject( () => { return err });
     });
   });
 
   return prom
-    .then((resolve) => {
-      return resolve()
-    })
-    .catch((rej) => {
-      rej();
-    })
 };
