@@ -7,7 +7,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs')
 
 var Twitter = require('twitter');
-var config = require('./config.js');
+var config = require('../config.js');
 
 app.get('/', function (req,res) {
   twitterReq().then(tweets => {
@@ -18,7 +18,7 @@ app.get('/', function (req,res) {
 
 app.listen(3000, () => console.log('Listening on port 3000'))
 
-function twitterReq(){
+twitterReq = function() {
 
   var T = new Twitter(config);
 
