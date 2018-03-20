@@ -9,12 +9,11 @@ app.set('view engine', 'ejs')
 var Twitter = require('twitter');
 var config = require('./config.js');
 
-app.get('/', (req,res) => res.render('index', function(err, html){
+app.get('/', function (req,res) {
   twitterReq().then(data => {
-      // console.log(data.toString());
-      res.send(data);
-    })
-}));
+    res.render('index', { tweets: data })
+  })
+});
 
 app.listen(3000, () => console.log('Listening on port 3000'))
 
@@ -31,22 +30,25 @@ function twitterReq(){
   }
 
   const prom = new Promise(function(resolve,reject) {
-
     T.get('search/tweets', params, function(err, data, response) {
       if(!err) {
-         resolve(data
-          // for (var i = 0; i < data.statuses.length; i++) {
-          )
+        resolve( function(){
+          var tweets = [];
+          for (var i = 0; i < data.statuses.length; i++) {
+            tweets.push(data.statuses[i].text)
+          }
+          return tweets
+        })
       } else {
-        // reject(function(){ console.log("failure") })
+        reject(function(){ console.log("failure") })
       }
     })
   });
 
   return prom.then((result) => {
-    console.log(result.toString())
-    return result
-  }).catch(() => { console.log("error")})
+    // console.log(result.toString())
+    return result()
+  }).catch((rej) => { rej(); })
 
 
 };
