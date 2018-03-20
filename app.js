@@ -13,7 +13,7 @@ app.get('/', function (req,res) {
   twitterReq().then(tweets => {
     res.render('index', { tweets: tweets() })
   })
-  .catch( reject => { console.log(reject()) })
+  .catch( reject => { console.log(reject) })
 });
 
 app.listen(3000, () => console.log('Listening on port 3000'))
@@ -31,10 +31,16 @@ function twitterReq(){
 
   const prom = new Promise(function(resolve,reject) {
     T.get('search/tweets', params, function(err, data, response) {
-        resolve( () => {
-          var getTweetText = data.statuses.map(tweet => tweet.text)
-          return getTweetText
+      resolve( () => {
+        var tweets = data.statuses.map(function(tweetData) {
+          var tweet = {};
+          tweet.text = tweetData.text;
+          tweet.url = "https://twitter.com/" + tweetData.user.screen_name + "/status/" + tweetData.id_str
+          console.log(tweet.url)
+          return tweet;
         });
+        return tweets
+      });
 
         reject( () => { return err });
     });
