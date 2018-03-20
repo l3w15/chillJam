@@ -1,19 +1,20 @@
 const express = require('express')
-var tweetParser = require('../lib/tweetParser.js')
-const app = express()
+const TweetParser = require('../lib/tweetParser.js')
+const app = express();
+const Twitter = require('twitter');
+const config = require('../config.js');
+const tweetParser = TweetParser.tweetParser;
 
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'ejs')
 
-var Twitter = require('twitter');
-var config = require('../config.js');
-
 app.get('/', function (req,res) {
-  twitterReq().then(tweets => {
-    res.render('index', { tweets: tweets() })
-  })
-  .catch( reject => { console.log(reject) })
+  twitterReq()
+    .then( tweets => {
+      res.render('index', { tweets: tweets() })
+    })
+    .catch( reject => { console.log(reject) })
 });
 
 app.listen(3000, () => console.log('Listening on port 3000'))
@@ -25,24 +26,17 @@ twitterReq = function() {
   var params = {
     q: '#giveaway -RT',
     count: 100,
-    // result_type: 'recent',
+    result_type: 'recent',
     lang: 'en'
   }
 
-  const prom = new Promise(function(resolve,reject) {
+  const prom = new Promise(function(resolve, reject) {
     T.get('search/tweets', params, function(err, data, response) {
       resolve( () => {
-        var tweets = data.statuses.map(function(tweetData) {
-          var tweet = {};
-          tweet.text = tweetData.text;
-          tweet.url = "https://twitter.com/" + tweetData.user.screen_name + "/status/" + tweetData.id_str
-          console.log(tweet.url)
-          return tweet;
-        });
+        tweets = tweetParser(data)
         return tweets
       });
-
-        reject( () => { return err });
+      reject( () => { return err });
     });
   });
 
