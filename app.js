@@ -1,4 +1,5 @@
 const express = require('express')
+const util = require('util')
 const app = express()
 
 app.engine('html', require('ejs').renderFile);
@@ -9,7 +10,10 @@ var Twitter = require('twitter');
 var config = require('./config.js');
 
 app.get('/', (req,res) => res.render('index', function(err, html){
-  res.send(twitterReq())
+  twitterReq().then(data => {
+      // console.log(data.toString());
+      res.send(data);
+    })
 }));
 
 app.listen(3000, () => console.log('Listening on port 3000'))
@@ -30,15 +34,19 @@ function twitterReq(){
 
     T.get('search/tweets', params, function(err, data, response) {
       if(!err) {
-         for (var i = 0; i < data.statuses.length; i++) {
-          resolve(result.push( data.statuses[i].text ))
-        }
+         resolve(data
+          // for (var i = 0; i < data.statuses.length; i++) {
+          )
       } else {
-        reject( result.push( err ) )
+        // reject(function(){ console.log("failure") })
       }
     })
-    return prom.then((result) => {
-      return result
-    })
   });
+
+  return prom.then((result) => {
+    console.log(result.toString())
+    return result
+  }).catch(() => { console.log("error")})
+
+
 };
