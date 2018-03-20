@@ -7,7 +7,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs')
 
 var Twitter = require('twitter');
-var config = require('./config.js');
+var config = require('../config.js');
 
 app.get('/', function (req,res) {
   twitterReq().then(tweets => {
@@ -42,3 +42,7 @@ function twitterReq(){
 
   return prom
 };
+
+testFunction = function() {
+  return true
+}
