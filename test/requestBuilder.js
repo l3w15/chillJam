@@ -18,29 +18,73 @@ const likeReq           = requestBuilder.likeReq;
 const likeAllTweets     = requestBuilder.likeAllTweets;
 const retweetAllTweets  = requestBuilder.retweetAllTweets;
 const followAllUsers    = requestBuilder.followAllUsers;
+const retweetReq        = requestBuilder.retweetReq;
+const followReq        = requestBuilder.followReq;
 
 describe('defineParams', function() {
   it('defines the search parameters', function() {
-    expect(defineParams('chocolate')).to.be.a('object').with.property('count')
+    expect(defineParams('chocolate')).to.be.a('object').with.property('count');
   });
 });
 
-describe('getTweetsReq', function() {
-  it('returns the correct tweet data', function(done) {
-    var promise = getTweetsReq({
-      q: '#competition'
+describe('request methods', function() {
+  var twitter, params, id, idObj;
+
+  before(function() {
+    twitter = {};
+    params = { key: 'value' };
+    id = 12345;
+    idObj = { id: id };
+    var stubbedResponse = function(a, b) { return true; };
+    twitter.get = stubbedResponse;
+    twitter.post = stubbedResponse;
+  });
+
+  afterEach(function() {
+    chai.spy.restore();
+  });
+
+  describe('getTweetsReq', function() {
+    // it('returns the correct tweet data', function(done) {
+    //   var promise = getTweetsReq({
+    //     q: '#competition'
+    //   });
+    //   promise.then().should.eventually.have.property('statuses').notify(done);
+    // });
+
+    it('calls #get on the twitter parameter', function() {
+      let twitterSpy = chai.spy.on(twitter, 'get');
+      getTweetsReq(twitter, params);
+      expect(twitterSpy).to.have.been.called.with.exactly('search/tweets', params);
     });
-    promise.then().should.eventually.have.property('statuses').notify(done);
   });
 
-  it('calls #get on the twitter parameter', function() {
-    var twitter = {};
-    let twitterSpy = chai.spy.on(twitter, 'get', returns => true);
-    let params = { q: '#competition' };
-    getTweetsReq(twitter, params);
-    expect(twitterSpy).to.have.been.called;
-  })
+  describe('likeReq', function() {
+    it('calls post on the twitter parameter', function() {
+      let twitterSpy = chai.spy.on(twitter, 'post');
+      likeReq(twitter, id);
+      expect(twitterSpy).to.have.been.called.with.exactly('favourites/create', idObj);
+    });
+  });
+
+  describe('retweetReq', function() {
+    it('calls post on the twitter parameter', function() {
+      let twitterSpy = chai.spy.on(twitter, 'post');
+      retweetReq(twitter, id);
+      expect(twitterSpy).to.have.been.called.with.exactly('statuses/retweet', idObj);
+    });
+  });
+
+  describe('followReq', function() {
+    it('calls post on the twitter parameter', function() {
+      let twitterSpy = chai.spy.on(twitter, 'post');
+      followReq(twitter, id);
+      expect(twitterSpy).to.have.been.called.with.exactly('friendships/create', idObj);
+    });
+  });
 });
+
+
 
 describe('likeAllTweets', function() {
   it('likes all returned tweets', function() {
