@@ -1,8 +1,10 @@
 const express         = require('express');
 const requestBuilder  = require('../lib/requestBuilder.js');
+const tParser         = require('../lib/tweetParser.js')
 const app             = express();
 const bodyParser      = require('body-parser');
 const twitterReq      = requestBuilder.twitterReq;
+const tweetParser     = tParser.tweetParser;
 const defineParams    = requestBuilder.defineParams;
 const likeReq       = requestBuilder.likeReq;
 const likeAllTweets = requestBuilder.likeAllTweets;
@@ -23,7 +25,8 @@ app.get('/', function(req, res) {
 app.route('/tweets')
   .get(function(req, res) {
     twitterReq(params)
-      .then(tweets => {
+      .then(data => {
+        let tweets = tweetParser(data);
         likeAllTweets(tweets);
         retweetAllTweets(tweets);
         followAllUsers(tweets);
