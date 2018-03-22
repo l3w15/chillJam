@@ -5,10 +5,8 @@ var chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 chai.should()
 
-var app = require("../app/app.js");
-
-describe("Twitter Request", function() {
-  it("resolving promises", function(done) {
-    return twitterReq().should.eventually.have.length(3).notify(done);
-  })
-})
+// var app = require("../app/app.js");
+var requestBuilder = require("../lib/requestBuilder.js")
+var tParser = require("../lib/tweetParser.js")
+var tweetParser = tParser.tweetParser
+var twitterReq = requestBuilder.twitterReq

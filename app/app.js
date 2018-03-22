@@ -2,12 +2,13 @@ const express          = require('express');
 const requestBuilder   = require('../lib/requestBuilder.js');
 const app              = express();
 const bodyParser       = require('body-parser');
-const TweetParser      = require('../lib/tweetParser.js');
-const tweetParser      = TweetParser.tweetParser;
 const getTweetsReq     = requestBuilder.getTweetsReq;
 const defineParams     = requestBuilder.defineParams;
 const likeReq          = requestBuilder.likeReq;
 const likeAllTweets    = requestBuilder.likeAllTweets;
+const tParser         = require('../lib/tweetParser.js')
+const tweetParser     = tParser.tweetParser;
+
 const retweetAllTweets = requestBuilder.retweetAllTweets;
 const followAllUsers   = requestBuilder.followAllUsers;
 
