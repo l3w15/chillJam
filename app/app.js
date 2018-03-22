@@ -4,13 +4,15 @@ const app              = express();
 const bodyParser       = require('body-parser');
 const getTweetsReq     = requestBuilder.getTweetsReq;
 const defineParams     = requestBuilder.defineParams;
-const likeReq          = requestBuilder.likeReq;
 const likeAllTweets    = requestBuilder.likeAllTweets;
 const tParser         = require('../lib/tweetParser.js')
 const tweetParser     = tParser.tweetParser;
-
 const retweetAllTweets = requestBuilder.retweetAllTweets;
 const followAllUsers   = requestBuilder.followAllUsers;
+const Twitter = require('twitter');
+const config  = require('../config.js');
+
+const twitter = new Twitter(config);
 
 var params;
 
@@ -25,12 +27,12 @@ app.get('/', function(req, res) {
 
 app.route('/tweets')
   .get(function(req, res) {
-    getTweetsReq(params)
+    getTweetsReq(twitter, params)
       .then(data => {
         let tweets = tweetParser(data);
-        likeAllTweets(tweets);
-        retweetAllTweets(tweets);
-        followAllUsers(tweets);
+        likeAllTweets(twitter, tweets);
+        retweetAllTweets(twitter, tweets);
+        followAllUsers(twitter, tweets);
         res.render('tweets', { tweets: tweets });
       })
       .catch(reject => { console.log(reject); });
