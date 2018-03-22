@@ -24,7 +24,6 @@ app.route('/tweets')
   .get(function(req, res) {
     twitterReq(params)
       .then(tweets => {
-        var tweets = tweets();
         likeAllTweets(tweets);
         retweetAllTweets(tweets);
         followAllUsers(tweets);
