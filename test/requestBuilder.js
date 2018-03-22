@@ -12,7 +12,7 @@ const requestBuilder    = require("../lib/requestBuilder.js")
 const tParser           = require("../lib/tweetParser.js")
 const tweetParser       = tParser.tweetParser;
 const singleTweetParser = tParser.singleTweetParser;
-const twitterReq        = requestBuilder.twitterReq;
+const getTweetsReq      = requestBuilder.getTweetsReq;
 const defineParams      = requestBuilder.defineParams;
 const likeReq           = requestBuilder.likeReq;
 const likeAllTweets     = requestBuilder.likeAllTweets;
@@ -25,9 +25,9 @@ describe('defineParams', function() {
   });
 });
 
-describe('twitterReq', function() {
+describe('getTweetsReq', function() {
   it('returns the correct tweet data', function(done) {
-    var promise = twitterReq({
+    var promise = getTweetsReq({
       q: '#competition'
     });
     promise.then().should.eventually.have.property('statuses').notify(done);
