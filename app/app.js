@@ -24,9 +24,9 @@ app.route('/tweets')
   .get(function(req, res) {
     twitterReq(params)
       .then(tweets => {
-        likeAllTweets(tweets);
-        retweetAllTweets(tweets);
-        followAllUsers(tweets);
+        // likeAllTweets(tweets);
+        // retweetAllTweets(tweets);
+        // followAllUsers(tweets);
         res.render('tweets', { tweets: tweets });
       })
       .catch(reject => { console.log(reject); });
