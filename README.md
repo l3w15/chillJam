@@ -1,4 +1,4 @@
-## chillJam
+# chillJam
 A javascript bot for entering twitter competitions, built in week 9 of the Makers Academy bootcamp.
 
 #### Technologies used
