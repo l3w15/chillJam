@@ -9,10 +9,6 @@
         <li>
           <a href=<%= tweets[i].url %> target="_blank"><%= tweets[i].text %></a>
         </li>
-        <form action="/favourites" method="post">
-          <input type="hidden" name="id" value="<%= tweets[i].id %>">
-          <input type="submit" value="Like"></input>
-        </form>
       <% } %>
     </ol>
   </body>
