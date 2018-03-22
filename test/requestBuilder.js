@@ -47,7 +47,7 @@ describe('likeAllTweets', function() {
 });
 
 describe('retweetAllTweets', function() {
-  it('likes all returned tweets', function() {
+  it('retweets all returned tweets', function() {
     var tweet1 = { id: 1234 };
     var tweet2 = { id: 5678 };
     let spy1 = chai.spy.on(tweet1, 'retweetReq');
@@ -58,8 +58,8 @@ describe('retweetAllTweets', function() {
   });
 });
 
-describe('retweetAllTweets', function() {
-  it('likes all returned tweets', function() {
+describe('followAllUsers', function() {
+  it('follows all returned users', function() {
     var tweet1 = { id: 1234 };
     var tweet2 = { id: 5678 };
     let spy1 = chai.spy.on(tweet1, 'followReq');
