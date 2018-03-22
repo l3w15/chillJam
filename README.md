@@ -15,12 +15,15 @@ Testing
 
 ### To run tests
 ```
-$ git clone https://github.com/desmondmorris/node-twitter.git
+$ git clone git@github.com:Jestfer/chillJam.git
+$ cd chillJam
 $ npm install
 // unit tests //
 $ npm test
 // feature tests //
 $ mocha test/features/index.js
+// Twitter api integration test //
+$ mocha test/integration/APICall.jss
 ```
 
 ### Approach
