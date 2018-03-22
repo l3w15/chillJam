@@ -45,3 +45,27 @@ describe('likeAllTweets', function() {
     expect(spy2).to.have.been.called;
   });
 });
+
+describe('retweetAllTweets', function() {
+  it('likes all returned tweets', function() {
+    var tweet1 = { id: 1234 };
+    var tweet2 = { id: 5678 };
+    let spy1 = chai.spy.on(tweet1, 'retweetReq');
+    let spy2 = chai.spy.on(tweet2, 'retweetReq');
+    retweetAllTweets([tweet1, tweet2]);
+    expect(spy1).to.have.been.called;
+    expect(spy2).to.have.been.called;
+  });
+});
+
+describe('retweetAllTweets', function() {
+  it('likes all returned tweets', function() {
+    var tweet1 = { id: 1234 };
+    var tweet2 = { id: 5678 };
+    let spy1 = chai.spy.on(tweet1, 'followReq');
+    let spy2 = chai.spy.on(tweet2, 'followReq');
+    followAllUsers([tweet1, tweet2]);
+    expect(spy1).to.have.been.called;
+    expect(spy2).to.have.been.called;
+  });
+});
