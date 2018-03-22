@@ -1,13 +1,13 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Tweets</title>
   </head>
   <body>
-    <h1>welcome</h1>
-    <ol>
-      <% for (var i = 0; i < tweets.length; i++) {%>
-        <li><a href=<%= tweets[i].url %>><%= tweets[i].text %></a></li>
-      <% } %>
-    </ol>
+    <form action="/tweets" method="post">
+      <input type="text" name="query" placeholder="Enter a search term">
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>

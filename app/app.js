@@ -1,42 +1,44 @@
-const express = require('express');
-const TweetParser = require('../lib/tweetParser.js');
-const app = express();
-const Twitter = require('twitter');
-const config = require('../config.js');
-const tweetParser = TweetParser.tweetParser;
+const express         = require('express');
+const requestBuilder  = require('../lib/requestBuilder.js');
+const app             = express();
+const bodyParser      = require('body-parser');
+const twitterReq      = requestBuilder.twitterReq;
+const defineParams    = requestBuilder.defineParams;
+const likeReq       = requestBuilder.likeReq;
+const likeAllTweets = requestBuilder.likeAllTweets;
+const retweetAllTweets = requestBuilder.retweetAllTweets;
+const followAllUsers = requestBuilder.followAllUsers;
+
+var params;
 
 app.engine('html', require('ejs').renderFile);
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-  twitterReq()
-    .then(tweets => {
-      res.render('index', { tweets: tweets() });
-    })
-    .catch(reject => { console.log(reject); });
+  res.render('index');
 });
 
-app.listen(3000, () => console.log('Listening on port 3000'));
-
-var twitterReq = function() {
-  var T = new Twitter(config);
-
-  var params = {
-    q: '#giveaway -RT',
-    count: 100,
-    result_type: 'recent',
-    lang: 'en'
-  };
-
-  const prom = new Promise(function(resolve, reject) {
-    T.get('search/tweets', params, function(err, data, response) {
-      resolve(() => {
-        return tweetParser(data);
-      });
-      reject(() => { return err; });
-    });
+app.route('/tweets')
+  .get(function(req, res) {
+    twitterReq(params)
+      .then(tweets => {
+        likeAllTweets(tweets);
+        retweetAllTweets(tweets);
+        followAllUsers(tweets);
+        res.render('tweets', { tweets: tweets });
+      })
+      .catch(reject => { console.log(reject); });
+  })
+  .post(function(req, res) {
+    params = defineParams(req.body.query);
+    res.redirect('/tweets');
   });
 
-  return prom;
-};
+// app.post('/favourites', function(req, res) {
+//   likeReq(req.body.id);
+//   res.redirect('/tweets');
+// });
+
+app.listen(3000, () => console.log('Listening on port 3000'));

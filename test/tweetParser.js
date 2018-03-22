@@ -17,6 +17,10 @@ describe('singleTweetParser', function() {
   it("contains the tweet's text", function() {
     singleTweetParser(testJson.statuses[0]).text.should.equal('From pilot to astronaut, Robert H. Lawrence was the first African-American to be selected as an astronaut by any na… https://t.co/FjPEWnh804');
   });
+
+  it("contains the tweet's id", function() {
+    singleTweetParser(testJson.statuses[0]).id.should.equal('967824267948773377');
+  });
 });
 
 describe('tweetParser', function() {
