@@ -35,12 +35,6 @@ describe('twitterReq', function() {
  });
 });
 
-// describe('likeReq', function(){
-//   it('likes a tweet given the tweet_id', function(){
-//
-//   })
-// })
-
 describe('likeAllTweets', function(){
   it('likes all returned tweets', function(){
     var tweet1 = {id: 1234}
@@ -48,4 +42,4 @@ describe('likeAllTweets', function(){
     likeAllTweets([tweet1, tweet2])
     expect(tweet1.liked).to.be.true
   })
-})
+});
