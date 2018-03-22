@@ -32,6 +32,14 @@ describe('getTweetsReq', function() {
     });
     promise.then().should.eventually.have.property('statuses').notify(done);
   });
+
+  it('calls #get on the twitter parameter', function() {
+    var twitter = {};
+    let twitterSpy = chai.spy.on(twitter, 'get', returns => true);
+    let params = { q: '#competition' };
+    getTweetsReq(twitter, params);
+    expect(twitterSpy).to.have.been.called;
+  })
 });
 
 describe('likeAllTweets', function() {
