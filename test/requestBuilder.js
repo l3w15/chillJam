@@ -83,8 +83,8 @@ describe('API methods', function(){
 
   describe('do X to all methods', function() {
     before(function() {
-      tweet1 = {id: 1234};
-      tweet2 = {id: 5678};
+      tweet1 = { id: 1234, userId: 3456 };
+      tweet2 = { id: 5678, userId: 6543 };
     });
 
     describe('likeAllTweets', function() {

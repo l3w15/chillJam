@@ -1,14 +1,19 @@
 <html>
   <head>
-    <title></title>
+    <title>Tweets</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
-    <h1 class="info-message">You have liked retweeted and followed the below tweets</h1>
+    <h1 class="info-message">You have liked, retweeted and followed the below tweets</h1>
+    <h4>Click to visit the original tweet</h4>
     <ol>
       <% for (var i = 0; i < tweets.length; i++) {%>
-        <li>
-          <a href=<%= tweets[i].url %> target="_blank"><%= tweets[i].text %></a>
-        </li>
+        <a href=<%= tweets[i].url %> target="_blank">
+          <li>
+           <%= tweets[i].text %>
+          </li>
+        </a>
       <% } %>
     </ol>
   </body>

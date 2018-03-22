@@ -2,14 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Tweets</title>
+    <title>Search</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
     <h1 id="welcome">Welcome to chillJam!</h1>
+    <h4>Enter a search term below to enter competitions with our TwitterBot</h4>
 
     <form action="/tweets" method="post">
-      <input type="text" id="query" name="query" placeholder="Enter a search term">
-      <input type="submit" value="Submit">
+      <input type="text" id="query" name="query" placeholder="e.g. chocolate...">
+      <input id="submit" type="submit" value="Submit">
     </form>
   </body>
 </html>
