@@ -1,7 +1,7 @@
 # chillJam
 A javascript bot for entering twitter competitions, built in week 9 of the Makers Academy bootcamp.
 
-#### Technologies used
+### Technologies used
 - Express.js
 - Node.js
 - node-twitter
@@ -13,7 +13,7 @@ Testing
 - Chai
 - Zombie
 
-#### To run tests
+### To run tests
 ```
 $ git clone https://github.com/desmondmorris/node-twitter.git
 $ npm install
@@ -23,7 +23,7 @@ $ npm test
 $ mocha test/features/index.js
 ```
 
-#### Approach
+### Approach
 
 - Used Agile methodologies to manage the team.
   - We started with an MVP - a website which would return all competition tweets featuring a certain search term defined by the user.
@@ -36,7 +36,7 @@ $ mocha test/features/index.js
 
 - As is often the case when learning new technologies, true Test Driven Development can be tricky, however, once the core functionality was in place we worked hard to test it as thoroughly as possible.
 
-#### Learnings
+### Learnings
 
 - As part of the iteration process, we explored our knowledge of Promises and their functions.
 - Working with the Twitter API has been extremely interesting and we have successfully implemented a variety of features using the RESTful routes it provides.
