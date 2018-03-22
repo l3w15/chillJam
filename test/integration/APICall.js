@@ -15,7 +15,7 @@ const getTweetsReq   = requestBuilder.getTweetsReq;
 describe('Makes successfuly request to Twitter Api', function() {
   it('returns the correct tweet data', function(done) {
     let params = { q: '#competition' };
-    let promise = getTweetsReq(twitter, params);
-    promise.then().should.eventually.have.property('statuses').notify(done);
+    let request = getTweetsReq(twitter, params);
+    request.then().should.eventually.have.property('statuses').notify(done);
   });
 });
