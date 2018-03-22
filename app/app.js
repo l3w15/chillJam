@@ -1,13 +1,15 @@
-const express         = require('express');
-const requestBuilder  = require('../lib/requestBuilder.js');
-const app             = express();
-const bodyParser      = require('body-parser');
-const twitterReq      = requestBuilder.twitterReq;
-const defineParams    = requestBuilder.defineParams;
-const likeReq       = requestBuilder.likeReq;
-const likeAllTweets = requestBuilder.likeAllTweets;
+const express          = require('express');
+const requestBuilder   = require('../lib/requestBuilder.js');
+const app              = express();
+const bodyParser       = require('body-parser');
+const TweetParser      = require('../lib/tweetParser.js');
+const tweetParser      = TweetParser.tweetParser;
+const getTweetsReq     = requestBuilder.getTweetsReq;
+const defineParams     = requestBuilder.defineParams;
+const likeReq          = requestBuilder.likeReq;
+const likeAllTweets    = requestBuilder.likeAllTweets;
 const retweetAllTweets = requestBuilder.retweetAllTweets;
-const followAllUsers = requestBuilder.followAllUsers;
+const followAllUsers   = requestBuilder.followAllUsers;
 
 var params;
 
@@ -22,11 +24,12 @@ app.get('/', function(req, res) {
 
 app.route('/tweets')
   .get(function(req, res) {
-    twitterReq(params)
-      .then(tweets => {
-        // likeAllTweets(tweets);
-        // retweetAllTweets(tweets);
-        // followAllUsers(tweets);
+    getTweetsReq(params)
+      .then(data => {
+        let tweets = tweetParser(data);
+        likeAllTweets(tweets);
+        retweetAllTweets(tweets);
+        followAllUsers(tweets);
         res.render('tweets', { tweets: tweets });
       })
       .catch(reject => { console.log(reject); });

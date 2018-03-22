@@ -39,7 +39,7 @@ describe('chillJam', function() {
     });
 
     it('should display the tweets after sending a req', function() {
-      browser.assert.text('welcome');
+      browser.assert.text('.goodbye', 'goodbye');
       // welcome message
       // has li elems
       // has a href
