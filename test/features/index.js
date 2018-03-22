@@ -26,21 +26,12 @@ describe('chillJam', function() {
   describe('fills search term', function() {
     before(function(done) {
       browser.fill('#query', 'chocolate');
-      browser.pressButton('Submit').then(function() {
-        console.log('We are in here!');
-        done();
-      });
-
-      // NEXT: get rid of our promise, use the T.get one
-      // This way we should be able to test the request on screen
-      // sampleTweetSearchJson.js
-
-      // Test the current path stuff
+      browser.pressButton('Submit').then(() => done());
     });
 
     it('should display the tweets after sending a req', function() {
-      browser.assert.text('.goodbye', 'goodbye');
-      // welcome message
+      browser.assert.text('.info-message', 'You have liked retweeted and followed the below tweets');
+      // Further testing welcome message
       // has li elems
       // has a href
     });

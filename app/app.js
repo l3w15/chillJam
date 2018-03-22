@@ -39,9 +39,4 @@ app.route('/tweets')
     res.redirect('/tweets');
   });
 
-// app.post('/favourites', function(req, res) {
-//   likeReq(req.body.id);
-//   res.redirect('/tweets');
-// });
-
 app.listen(3000, () => console.log('Listening on port 3000'));
