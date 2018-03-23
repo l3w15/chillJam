@@ -36,8 +36,9 @@ li {
   padding: 5px 15px;
   border-radius: 10px;
   box-shadow: -3px 3px 2px #086284;
-  margin: 10px 40px;
+  margin: 10px auto;
   transition: 0.2s;
+  max-width: 1100;
 }
 
 li:hover {
