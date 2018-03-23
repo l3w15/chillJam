@@ -30,7 +30,7 @@ describe('chillJam', function() {
     });
 
     it('should display the tweets after sending a req', function() {
-      browser.assert.text('.info-message', 'You have liked retweeted and followed the below tweets');
+      browser.assert.text('.info-message', 'You have liked, retweeted and followed the below tweets');
       // Further testing welcome message
       // has li elems
       // has a href
