@@ -24,9 +24,10 @@ describe('API methods', () => {
 
   before(() => {
     twitter = {};
-    stubbedResponse = (a, b) => { return true; };
+    stubbedResponse = (a, b) => { return stubbedResponse; };
     twitter.get = stubbedResponse;
     twitter.post = stubbedResponse;
+    twitter.post.catch = stubbedResponse;
   });
 
   afterEach(() => {
@@ -54,7 +55,7 @@ describe('API methods', () => {
       it('calls post on the twitter parameter', () => {
         let twitterSpy = chai.spy.on(twitter, 'post');
         likeReq(twitter, id);
-        expect(twitterSpy).to.have.been.called.with.exactly('favourites/create', idObj);
+        expect(twitterSpy).to.have.been.called.with.exactly('favorites/create', idObj);
       });
     });
 
