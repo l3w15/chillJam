@@ -1,9 +1,9 @@
 # chillJam
 A javascript bot for entering twitter competitions, built in week 9 of the Makers Academy bootcamp.
 
-[Screen_Shot_2018-04-17_at_06.40.59.png](https://postimg.cc/image/iiq4plsd3/)
+[![Screen_Shot_2018-04-17_at_06.40.59.png](https://s31.postimg.cc/3zizo6z8b/Screen_Shot_2018-04-17_at_06.40.59.png)](https://postimg.cc/image/iiq4plsd3/)
 
-[Screen_Shot_2018-04-17_at_06.41.50.png](https://postimg.cc/image/5rbyj3y0n/)
+[![Screen_Shot_2018-04-17_at_06.41.50.png](https://s31.postimg.cc/bs9ng6kmz/Screen_Shot_2018-04-17_at_06.41.50.png)](https://postimg.cc/image/5rbyj3y0n/)
 
 ### Technologies used
 - Express.js
