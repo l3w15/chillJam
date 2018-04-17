@@ -1,6 +1,10 @@
 # chillJam
 A javascript bot for entering twitter competitions, built in week 9 of the Makers Academy bootcamp.
 
+[Screen_Shot_2018-04-17_at_06.40.59.png](https://postimg.cc/image/iiq4plsd3/)
+
+[Screen_Shot_2018-04-17_at_06.41.50.png](https://postimg.cc/image/5rbyj3y0n/)
+
 ### Technologies used
 - Express.js
 - Node.js
@@ -21,9 +25,9 @@ $ npm install
 // unit tests //
 $ npm test
 // feature tests //
-$ mocha test/features/index.js
+$ mocha test/features/indexSpec.js
 // Twitter api integration test //
-$ mocha test/integration/APICall.jss
+$ mocha test/integration/APICall.js
 ```
 
 ### Approach

@@ -1,4 +1,3 @@
-
 module.exports = {
   consumer_key: process.env.CHILLJAM_CONSUMER_KEY,
   consumer_secret: process.env.CHILLJAM_CONSUMER_SECRET,
